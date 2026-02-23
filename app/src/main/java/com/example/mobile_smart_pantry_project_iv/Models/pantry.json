@@ -1,0 +1,58 @@
+[
+  {
+    "id": "1",
+    "name": "Martian crackers",
+    "quantity": 3,
+    "category": "Food",
+    "imageRef": "crackers.png"
+  },
+  {
+    "id": "2",
+    "name": "Oxygen tank",
+    "quantity": 7,
+    "category": "Tools",
+    "imageRef": "oxygen-tank.png"
+  },
+  {
+    "id": "3",
+    "name": "Freeze-dried pizza",
+    "quantity": 6,
+    "category": "Food",
+    "imageRef": "freeze-dried-pizza.png"
+  },
+  {
+    "id": "4",
+    "name": "Space Soda",
+    "quantity": 15,
+    "category": "Food",
+    "imageRef": "space-soda.png"
+  },
+  {
+    "id": "5",
+    "name": "First aid kit",
+    "quantity": 8,
+    "category": "Life support",
+    "imageRef": "first-aid-kit.png"
+  },
+  {
+    "id": "6",
+    "name": "Outdoor LED floodlight",
+    "quantity": 6,
+    "category": "Tools",
+    "imageRef": "floodlight.png"
+  },
+  {
+    "id": "7",
+    "name": "AED",
+    "quantity": 5,
+    "category": "Life support",
+    "imageRef": "aed.png"
+  },
+  {
+    "id": "8",
+    "name": "Space jetpack",
+    "quantity": 7,
+    "category": "Tools",
+    "imageRef": "space-jetpack.png"
+  }
+]
