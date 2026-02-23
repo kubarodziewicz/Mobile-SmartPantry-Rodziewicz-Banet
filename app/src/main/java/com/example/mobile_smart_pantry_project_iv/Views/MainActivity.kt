@@ -1,10 +1,11 @@
-package com.example.mobile_smart_pantry_project_iv
+package com.example.mobile_smart_pantry_project_iv.Views
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.mobile_smart_pantry_project_iv.R
 import com.example.mobile_smart_pantry_project_iv.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
