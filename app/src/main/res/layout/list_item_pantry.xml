@@ -34,18 +34,21 @@
         >
 
         <TextView
-            android:id="@+id/heroClassTextView"
+            android:id="@+id/productNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tytuł produktu"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:textColor="#1b1b1b"
             />
         <TextView
+            android:id="@+id/productQuantityTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ilość produktu: 1"
             android:textSize="14sp"
+            android:textColor="#1b1b1b"
             />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,55 +4,55 @@
     "name": "Martian crackers",
     "quantity": 3,
     "category": "Food",
-    "imageRef": "crackers.png"
+    "imageRef": "crackers.xml"
   },
   {
     "id": "2",
     "name": "Oxygen tank",
     "quantity": 7,
     "category": "Tools",
-    "imageRef": "oxygen-tank.png"
+    "imageRef": "oxygen-tank.xml"
   },
   {
     "id": "3",
     "name": "Freeze-dried pizza",
     "quantity": 6,
     "category": "Food",
-    "imageRef": "freeze-dried-pizza.png"
+    "imageRef": "freeze-dried-pizza.xml"
   },
   {
     "id": "4",
     "name": "Space Soda",
     "quantity": 15,
     "category": "Food",
-    "imageRef": "space-soda.png"
+    "imageRef": "space-soda.xml"
   },
   {
     "id": "5",
     "name": "First aid kit",
     "quantity": 8,
     "category": "Life support",
-    "imageRef": "first-aid-kit.png"
+    "imageRef": "first-aid-kit.xml"
   },
   {
     "id": "6",
     "name": "Outdoor LED floodlight",
     "quantity": 6,
     "category": "Tools",
-    "imageRef": "floodlight.png"
+    "imageRef": "floodlight.xml"
   },
   {
     "id": "7",
     "name": "AED",
     "quantity": 5,
     "category": "Life support",
-    "imageRef": "aed.png"
+    "imageRef": "aed.xml"
   },
   {
     "id": "8",
     "name": "Space jetpack",
     "quantity": 7,
     "category": "Tools",
-    "imageRef": "space-jetpack.png"
+    "imageRef": "space-jetpack.xml"
   }
 ]

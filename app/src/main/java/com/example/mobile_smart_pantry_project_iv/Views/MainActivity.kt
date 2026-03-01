@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.ListAdapter
 import com.example.mobile_smart_pantry_project_iv.Models.Product
+import com.example.mobile_smart_pantry_project_iv.ProductAdapter
 import com.example.mobile_smart_pantry_project_iv.R
 import com.example.mobile_smart_pantry_project_iv.databinding.ActivityMainBinding
 import kotlinx.serialization.encodeToString
@@ -21,7 +22,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     private lateinit var listAdapter: ArrayAdapter<Product>
-    private val productList = mutableListOf<Product>()
+    private lateinit var entryAdapter: ProductAdapter
+    val productList = mutableListOf<Product>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +39,21 @@ class MainActivity : AppCompatActivity() {
         listAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, productList)
         binding.pantryListView.adapter = listAdapter
 
+        // dodanie danych do listy zeby moc pozniej je zapisac do json
+        productList.add(Product("1", "Martian crackers", 3, "Food", "crackers.png"))
+        productList.add(Product("2", "Oxygen tank", 7, "Tools", "oxygen-tank.png"))
+        productList.add(Product("3", "Freeze-dried pizza", 6, "Food", "freeze-dried-pizza.png"))
+        productList.add(Product("4", "Space Soda", 15, "Food", "space-soda.png"))
+        productList.add(Product("5", "First aid kit", 8, "Life support", "first-aid-kit.png"))
+        productList.add(Product("6", "Outdoor LED floodlight", 6, "Tools", "floodlight.png"))
+        productList.add(Product("7", "AED", 5, "Life support", "aed.png"))
+        productList.add(Product("8", "Space jetpack", 7, "Tools", "space-jetpack.png"))
+
+        saveProductsToJsonFile()
         loadProductsFromJsonFile()
+
+        entryAdapter = ProductAdapter(this, productList)
+        binding.pantryListView.adapter = entryAdapter
     }
 
 
@@ -74,6 +90,5 @@ class MainActivity : AppCompatActivity() {
          } catch(e: Exception) {
              Toast.makeText(this, "wystapil blad przy zaladowaniu danych", Toast.LENGTH_SHORT).show()
          }
-         }
-
+     }
 }
