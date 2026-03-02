@@ -43,6 +43,8 @@ class ProductAdapter(
         }
 
         productImageView.setImageResource(imageResourceID)
+        Log.i("ilosc", "${products[6].quantity}")
+        Log.i("wys", "${quantityTextView.text}")
 
         return itemView
     }
