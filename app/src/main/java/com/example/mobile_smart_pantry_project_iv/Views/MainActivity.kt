@@ -40,14 +40,14 @@ class MainActivity : AppCompatActivity() {
         binding.pantryListView.adapter = listAdapter
 
         // dodanie danych do listy zeby moc pozniej je zapisac do json
-        productList.add(Product("1", "Martian crackers", 3, "Food", "crackers.png"))
-        productList.add(Product("2", "Oxygen tank", 7, "Tools", "oxygen-tank.png"))
-        productList.add(Product("3", "Freeze-dried pizza", 6, "Food", "freeze-dried-pizza.png"))
-        productList.add(Product("4", "Space Soda", 15, "Food", "space-soda.png"))
-        productList.add(Product("5", "First aid kit", 8, "Life support", "first-aid-kit.png"))
-        productList.add(Product("6", "Outdoor LED floodlight", 6, "Tools", "floodlight.png"))
-        productList.add(Product("7", "AED", 5, "Life support", "aed.png"))
-        productList.add(Product("8", "Space jetpack", 7, "Tools", "space-jetpack.png"))
+        productList.add(Product("1", "Martian crackers", 3, "Food", "crackers.xml"))
+        productList.add(Product("2", "Oxygen tank", 7, "Tools", "oxygen-tank.xml"))
+        productList.add(Product("3", "Freeze-dried pizza", 6, "Food", "freeze-dried-pizza.xml"))
+        productList.add(Product("4", "Space Soda", 15, "Food", "space-soda.xml"))
+        productList.add(Product("5", "First aid kit", 8, "Life support", "first-aid-kit.xml"))
+        productList.add(Product("6", "Outdoor LED floodlight", 6, "Tools", "floodlight.xml"))
+        productList.add(Product("7", "AED", 5, "Life support", "aed.xml"))
+        productList.add(Product("8", "Space jetpack", 7, "Tools", "space-jetpack.xml"))
 
         saveProductsToJsonFile()
         loadProductsFromJsonFile()
