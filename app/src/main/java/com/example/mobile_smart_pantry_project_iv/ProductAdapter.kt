@@ -3,6 +3,7 @@ package com.example.mobile_smart_pantry_project_iv
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +34,8 @@ class ProductAdapter(
 
         nameTextView.text = entry.name
         quantityTextView.text = "Ilość: ${entry.quantity}"
+        if(entry.quantity <= 3) quantityTextView.setTextColor(R.color.red)
+        else quantityTextView.setTextColor(R.color.black)
 
         val imageResourceID = when(entry.imageRef.lowercase()) {
             "crackers.xml" -> R.drawable.crackers
@@ -51,12 +54,17 @@ class ProductAdapter(
         addButton.setOnClickListener {
             entry.quantity ++
             quantityTextView.text = "Ilość: ${entry.quantity}"
-            Log.i("ilos","${entry.id} - ${entry.quantity}")
+
+            if(entry.quantity <= 3) quantityTextView.setTextColor(Color.parseColor("#EE4444"))
+            else quantityTextView.setTextColor(Color.parseColor("#EE4444"))
         }
 
         removeButton.setOnClickListener {
             entry.quantity --
             quantityTextView.text = "Ilość: ${entry.quantity}"
+
+            if(entry.quantity <= 3) quantityTextView.setTextColor(Color.parseColor("#EE4444"))
+            else quantityTextView.setTextColor(R.color.black)
         }
 
         return itemView
