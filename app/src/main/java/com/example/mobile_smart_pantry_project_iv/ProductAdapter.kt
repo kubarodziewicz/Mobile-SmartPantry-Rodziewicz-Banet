@@ -8,9 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.mobile_smart_pantry_project_iv.Models.Product
+import kotlinx.coroutines.flow.combine
 
 class ProductAdapter(
     private val context: Context,
@@ -25,10 +28,11 @@ class ProductAdapter(
         val productImageView = itemView.findViewById<ImageView>(R.id.itemImageView)
         val nameTextView = itemView.findViewById<TextView>(R.id.productNameTextView)
         val quantityTextView = itemView.findViewById<TextView>(R.id.productQuantityTextView)
+        val addButton = itemView.findViewById<Button>(R.id.addButton)
+        val removeButton = itemView.findViewById<Button>(R.id.removeButton)
 
         nameTextView.text = entry.name
         quantityTextView.text = "Ilość: ${entry.quantity}"
-
 
         val imageResourceID = when(entry.imageRef.lowercase()) {
             "crackers.xml" -> R.drawable.crackers
@@ -43,6 +47,17 @@ class ProductAdapter(
         }
 
         productImageView.setImageResource(imageResourceID)
+
+        addButton.setOnClickListener {
+            entry.quantity ++
+            quantityTextView.text = "Ilość: ${entry.quantity}"
+            Log.i("ilos","${entry.id} - ${entry.quantity}")
+        }
+
+        removeButton.setOnClickListener {
+            entry.quantity --
+            quantityTextView.text = "Ilość: ${entry.quantity}"
+        }
 
         return itemView
     }
