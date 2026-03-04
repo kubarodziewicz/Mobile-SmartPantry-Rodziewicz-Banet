@@ -13,8 +13,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.mobile_smart_pantry_project_iv.Models.Product
 import kotlinx.coroutines.flow.combine
+import androidx.core.graphics.toColorInt
 
 class ProductAdapter(
     private val context: Context,
@@ -29,13 +31,14 @@ class ProductAdapter(
         val productImageView = itemView.findViewById<ImageView>(R.id.itemImageView)
         val nameTextView = itemView.findViewById<TextView>(R.id.productNameTextView)
         val quantityTextView = itemView.findViewById<TextView>(R.id.productQuantityTextView)
+        val mainLayout = itemView.findViewById<ConstraintLayout>(R.id.mainLayout)
         val addButton = itemView.findViewById<Button>(R.id.addButton)
         val removeButton = itemView.findViewById<Button>(R.id.removeButton)
 
         nameTextView.text = entry.name
         quantityTextView.text = "Ilość: ${entry.quantity}"
-        if(entry.quantity <= 3) quantityTextView.setTextColor(R.color.red)
-        else quantityTextView.setTextColor(R.color.black)
+        if(entry.quantity <= 5) mainLayout.setBackgroundColor("#EEBB55".toColorInt())
+        else mainLayout.setBackgroundColor("#888888".toColorInt())
 
         val imageResourceID = when(entry.imageRef.lowercase()) {
             "crackers.xml" -> R.drawable.crackers
@@ -55,16 +58,20 @@ class ProductAdapter(
             entry.quantity ++
             quantityTextView.text = "Ilość: ${entry.quantity}"
 
-            if(entry.quantity <= 3) quantityTextView.setTextColor(Color.parseColor("#EE4444"))
-            else quantityTextView.setTextColor(Color.parseColor("#EE4444"))
+            if(entry.quantity <= 5) mainLayout.setBackgroundColor("#EEBB55".toColorInt())
+            else mainLayout.setBackgroundColor("#888888".toColorInt())
         }
 
         removeButton.setOnClickListener {
             entry.quantity --
-            quantityTextView.text = "Ilość: ${entry.quantity}"
+            if (entry.quantity <= 0) {
+                entry.quantity = 0
+                mainLayout.setBackgroundColor("#EE4444".toColorInt())
+            }
+            else if(entry.quantity <= 5) mainLayout.setBackgroundColor("#EEBB55".toColorInt())
+            else mainLayout.setBackgroundColor("#888888".toColorInt())
 
-            if(entry.quantity <= 3) quantityTextView.setTextColor(Color.parseColor("#EE4444"))
-            else quantityTextView.setTextColor(R.color.black)
+            quantityTextView.text = "Ilość: ${entry.quantity}"
         }
 
         return itemView
