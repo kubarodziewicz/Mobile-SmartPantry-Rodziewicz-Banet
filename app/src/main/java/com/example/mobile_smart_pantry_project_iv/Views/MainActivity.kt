@@ -1,18 +1,17 @@
 package com.example.mobile_smart_pantry_project_iv.Views
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.util.Log.*
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.SpinnerAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.ListAdapter
 import com.example.mobile_smart_pantry_project_iv.Models.Product
 import com.example.mobile_smart_pantry_project_iv.ProductAdapter
 import com.example.mobile_smart_pantry_project_iv.R
@@ -72,6 +71,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                (view as? TextView)?.setTextColor(Color.BLACK) // cast `view` jako textView żeby umożliwić zmianę koloru tekstu aktualnie wybranego elementu w Spinnerze
                 val selectedItem = binding.categorySpinner.selectedItem
                 val filteredProductList = if(selectedItem == "All") {
                     productList
@@ -82,11 +82,8 @@ class MainActivity : AppCompatActivity() {
                 entryAdapter = ProductAdapter(this@MainActivity, filteredProductList)
                 binding.pantryListView.adapter = entryAdapter
             }
-
         }
-
     }
-
 
     fun saveProductsToJsonFile() {
         try {
