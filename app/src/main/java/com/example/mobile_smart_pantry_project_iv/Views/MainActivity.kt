@@ -3,7 +3,10 @@ package com.example.mobile_smart_pantry_project_iv.Views
 import android.os.Bundle
 import android.util.Log
 import android.util.Log.*
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -23,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private lateinit var listAdapter: ArrayAdapter<Product>
     private lateinit var entryAdapter: ProductAdapter
-    val productList = mutableListOf<Product>()
+    var productList = mutableListOf<Product>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +38,8 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
 
         listAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, productList)
         binding.pantryListView.adapter = listAdapter
@@ -54,6 +59,32 @@ class MainActivity : AppCompatActivity() {
 
         entryAdapter = ProductAdapter(this, productList)
         binding.pantryListView.adapter = entryAdapter
+
+        val categoryList = mutableListOf<String>("All", "Food", "Tools", "Life support")
+        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categoryList)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.categorySpinner.adapter = spinnerAdapter
+
+
+        binding.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedItem = binding.categorySpinner.selectedItem
+                val filteredProductList = if(selectedItem == "All") {
+                    productList
+                } else {
+                    productList.filter { item -> item.category == selectedItem} as MutableList<Product>
+                }
+
+                entryAdapter = ProductAdapter(this@MainActivity, filteredProductList)
+                binding.pantryListView.adapter = entryAdapter
+            }
+
+        }
+
     }
 
 
