@@ -1,6 +1,8 @@
 package com.example.mobile_smart_pantry_project_iv.Views
 
+import android.app.PendingIntent.getActivity
 import android.os.Bundle
+import android.text.TextWatcher
 import android.util.Log
 import android.util.Log.*
 import android.widget.ArrayAdapter
@@ -9,7 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.ListAdapter
+import androidx.core.widget.addTextChangedListener
 import com.example.mobile_smart_pantry_project_iv.Models.Product
 import com.example.mobile_smart_pantry_project_iv.ProductAdapter
 import com.example.mobile_smart_pantry_project_iv.R
@@ -54,6 +56,13 @@ class MainActivity : AppCompatActivity() {
 
         entryAdapter = ProductAdapter(this, productList)
         binding.pantryListView.adapter = entryAdapter
+
+        // not working, TODO – override getFilter method in order to properly filter out ListView elements
+        binding.textFilterEditText.addTextChangedListener { _ ->
+            val searchText = binding.textFilterEditText.text.toString()
+            listAdapter.filter.filter(searchText)
+            listAdapter.notifyDataSetChanged()
+        }
     }
 
 

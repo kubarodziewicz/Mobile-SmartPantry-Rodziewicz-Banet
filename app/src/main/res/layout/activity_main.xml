@@ -38,10 +38,9 @@
             android:layout_height="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editText"
+            app:layout_constraintStart_toEndOf="@+id/textFilterEditText"
             app:layout_constraintTop_toTopOf="parent"
             app:cardCornerRadius="8dp"
-
             >
             <Spinner
                 android:layout_width="140dp"
