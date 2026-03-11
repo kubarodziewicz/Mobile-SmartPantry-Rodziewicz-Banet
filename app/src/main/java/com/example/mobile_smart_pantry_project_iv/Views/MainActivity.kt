@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.util.Log.*
 import android.widget.ArrayAdapter
+import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -57,12 +58,21 @@ class MainActivity : AppCompatActivity() {
         entryAdapter = ProductAdapter(this, productList)
         binding.pantryListView.adapter = entryAdapter
 
-        // not working, TODO – override getFilter method in order to properly filter out ListView elements
-        binding.textFilterEditText.addTextChangedListener { _ ->
-            val searchText = binding.textFilterEditText.text.toString()
-            listAdapter.filter.filter(searchText)
-            listAdapter.notifyDataSetChanged()
-        }
+        // filter products using the search bar
+        // TODO – fix filtering logic not working properly
+        binding.productFilterSearchView.setOnQueryTextListener(object :  SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val queryText = binding.productFilterSearchView.toString()
+
+                val filterResult = productList.filter { item -> item.name == queryText } as MutableList<Product>
+                entryAdapter = ProductAdapter(this@MainActivity, filterResult)
+                binding.pantryListView.adapter = entryAdapter
+                return true
+            }
+        })
     }
 
 

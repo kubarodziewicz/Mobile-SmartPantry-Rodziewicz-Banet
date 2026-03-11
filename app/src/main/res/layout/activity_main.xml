@@ -21,8 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <EditText
-            android:id="@+id/textFilterEditText"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/productFilterSearchView"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -38,7 +38,7 @@
             android:layout_height="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textFilterEditText"
+            app:layout_constraintStart_toEndOf="@+id/productFilterSearchView"
             app:layout_constraintTop_toTopOf="parent"
             app:cardCornerRadius="8dp"
             >
