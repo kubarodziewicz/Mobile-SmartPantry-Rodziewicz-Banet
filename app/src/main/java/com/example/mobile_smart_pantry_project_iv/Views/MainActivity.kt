@@ -1,22 +1,18 @@
 package com.example.mobile_smart_pantry_project_iv.Views
 
 import android.graphics.Color
-import android.app.PendingIntent.getActivity
 import android.os.Bundle
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import androidx.appcompat.widget.SearchView
-import android.widget.SpinnerAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.widget.addTextChangedListener
 import com.example.mobile_smart_pantry_project_iv.Models.Product
 import com.example.mobile_smart_pantry_project_iv.ProductAdapter
 import com.example.mobile_smart_pantry_project_iv.R
@@ -42,8 +38,6 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-
 
         listAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, productList)
         binding.pantryListView.adapter = listAdapter
@@ -93,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
+                return
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -141,7 +135,7 @@ class MainActivity : AppCompatActivity() {
 
              listAdapter.notifyDataSetChanged()
 
-         } catch(e: Exception) {
+         } catch(_: Exception) {
              Toast.makeText(this, "wystapil blad przy zaladowaniu danych", Toast.LENGTH_SHORT).show()
          }
      }
