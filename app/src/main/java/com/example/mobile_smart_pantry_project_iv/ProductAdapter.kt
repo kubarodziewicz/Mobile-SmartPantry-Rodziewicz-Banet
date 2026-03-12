@@ -37,8 +37,7 @@ class ProductAdapter(
 
         nameTextView.text = entry.name
         quantityTextView.text = "Ilość: ${entry.quantity}"
-        if(entry.quantity <= 5) mainLayout.setBackgroundColor("#EEBB55".toColorInt())
-        else mainLayout.setBackgroundColor("#888888".toColorInt())
+        checkProductQuantity(entry, mainLayout)
 
         val imageResourceID = when(entry.imageRef.lowercase()) {
             "crackers.xml" -> R.drawable.crackers
@@ -57,21 +56,15 @@ class ProductAdapter(
         addButton.setOnClickListener {
             entry.quantity ++
             quantityTextView.text = "Ilość: ${entry.quantity}"
-
-            if(entry.quantity <= 5) mainLayout.setBackgroundColor("#EEBB55".toColorInt())
-            else mainLayout.setBackgroundColor("#888888".toColorInt())
+            checkProductQuantity(entry, mainLayout)
         }
 
         removeButton.setOnClickListener {
-            entry.quantity --
-            if (entry.quantity <= 0) {
-                entry.quantity = 0
-                mainLayout.setBackgroundColor("#EE4444".toColorInt())
+            if (entry.quantity >= 1) {
+                entry.quantity --
+                quantityTextView.text = "Ilość: ${entry.quantity}"
+                checkProductQuantity(entry, mainLayout)
             }
-            else if(entry.quantity <= 5) mainLayout.setBackgroundColor("#EEBB55".toColorInt())
-            else mainLayout.setBackgroundColor("#888888".toColorInt())
-
-            quantityTextView.text = "Ilość: ${entry.quantity}"
         }
 
         return itemView
