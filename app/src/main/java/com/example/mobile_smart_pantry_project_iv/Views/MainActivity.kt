@@ -1,18 +1,21 @@
 package com.example.mobile_smart_pantry_project_iv.Views
 
+import android.app.PendingIntent.getActivity
 import android.os.Bundle
+import android.text.TextWatcher
 import android.util.Log
 import android.util.Log.*
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.widget.SearchView
 import android.widget.SpinnerAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.ListAdapter
+import androidx.core.widget.addTextChangedListener
 import com.example.mobile_smart_pantry_project_iv.Models.Product
 import com.example.mobile_smart_pantry_project_iv.ProductAdapter
 import com.example.mobile_smart_pantry_project_iv.R
@@ -60,6 +63,27 @@ class MainActivity : AppCompatActivity() {
         entryAdapter = ProductAdapter(this, productList)
         binding.pantryListView.adapter = entryAdapter
 
+        // set up behavior for the search bar
+        binding.productFilterSearchView.apply {
+            isSubmitButtonEnabled = false
+        }
+
+        // filter products using the search bar
+        binding.productFilterSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val queryText = newText?.trim() ?: "" // elvis operator – provide a fallback value if newText is null
+
+                val filterResult = productList.filter { item -> item.name.contains(queryText, ignoreCase = true) }.toMutableList() // filter productList based on queryText, ignore case and use safe casting to a mutable list
+
+                // create a new adapter based on the filter result and reassign it
+                entryAdapter = ProductAdapter(this@MainActivity, filterResult)
+                binding.pantryListView.adapter = entryAdapter
+                return true
+            }
+        })
         val categoryList = mutableListOf<String>("All", "Food", "Tools", "Life support")
         val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categoryList)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
