@@ -45,6 +45,7 @@
             app:cardCornerRadius="8dp"
             >
             <Spinner
+                android:id="@+id/categorySpinner"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
