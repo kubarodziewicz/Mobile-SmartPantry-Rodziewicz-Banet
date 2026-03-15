@@ -71,11 +71,8 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 val queryText = newText?.trim() ?: "" // elvis operator – provide a fallback value if newText is null
 
-                val filterResult = productList.filter { item -> item.name.contains(queryText, ignoreCase = true) }.toMutableList() // filter productList based on queryText, ignore case and use safe casting to a mutable list
+                applyFilters()
 
-                // create a new adapter based on the filter result and reassign it
-                entryAdapter = ProductAdapter(this@MainActivity, filterResult)
-                binding.pantryListView.adapter = entryAdapter
                 return true
             }
         })
@@ -86,21 +83,11 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                return
-            }
-
+            override fun onNothingSelected(parent: AdapterView<*>?) { return }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 (view as? TextView)?.setTextColor(Color.BLACK) // cast `view` jako textView żeby umożliwić zmianę koloru tekstu aktualnie wybranego elementu w Spinnerze
                 val selectedItem = binding.categorySpinner.selectedItem
-                val filteredProductList = if(selectedItem == "All") {
-                    productList
-                } else {
-                    productList.filter { item -> item.category == selectedItem} as MutableList<Product>
-                }
-
-                entryAdapter = ProductAdapter(this@MainActivity, filteredProductList)
-                binding.pantryListView.adapter = entryAdapter
+                applyFilters()
             }
         }
     }
@@ -139,4 +126,28 @@ class MainActivity : AppCompatActivity() {
              Toast.makeText(this, "wystapil blad przy zaladowaniu danych", Toast.LENGTH_SHORT).show()
          }
      }
+    fun applyFilters() {
+        val filteredList = productList.filter { item ->
+
+            // sprawdzenie czy element listy odpowiada wybranej kategorii w Spinnerze
+            // jeżeli element Spinnera jest obecnie równy null lub "All", to categoryMatches = true, bo wtedy nie chcemy żadnego filtra
+            val categoryMatches: Boolean = if (binding.categorySpinner.selectedItem == null || binding.categorySpinner.selectedItem.toString() == "All") {
+                true
+            } else {
+                item.category == binding.categorySpinner.selectedItem
+            }
+
+            // sprawdzenie czy element listy odpowiada tekście w SearchView
+            val nameMatches: Boolean = if (binding.productFilterSearchView.query.toString().isEmpty()) {
+                true // jeżeli zawartość SearchView jest pusta, zakładamy że nameMatches = true, bo wtedy nie będzie filtrować
+            } else {
+                item.name.contains(binding.productFilterSearchView.query.toString(), ignoreCase = true)
+            }
+
+            return@filter categoryMatches && nameMatches // zwrócenie wyniku filtra
+        }
+        // przypisanie wyniku filtra do adaptera
+        entryAdapter = ProductAdapter(this, filteredList)
+        binding.pantryListView.adapter = entryAdapter
+    }
 }
