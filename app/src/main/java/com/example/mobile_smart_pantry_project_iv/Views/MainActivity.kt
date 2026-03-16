@@ -69,10 +69,7 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             override fun onQueryTextChange(newText: String?): Boolean {
-                val queryText = newText?.trim() ?: "" // elvis operator – provide a fallback value if newText is null
-
                 applyFilters()
-
                 return true
             }
         })
@@ -86,7 +83,6 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) { return }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 (view as? TextView)?.setTextColor(Color.BLACK) // cast `view` jako textView żeby umożliwić zmianę koloru tekstu aktualnie wybranego elementu w Spinnerze
-                val selectedItem = binding.categorySpinner.selectedItem
                 applyFilters()
             }
         }
